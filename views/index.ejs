@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>说说 - 首页</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/css.css" />
+</head>
+
+<body>
+    <% include nav.ejs %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <% if(login){ %>
+                    有什么新鲜事想告诉大家？
+                    <textarea class="form-control"></textarea>
+                    可以配一些图片（最多9张）
+                    <div class="picupbox" id="picupbox">
+                        <ul id="sortable">
+                             
+                        </ul>
+                    </div>
+                    <br>
+                    <div style="clear:both;">
+                        <button id="tijiaobtn">提交</button>
+                    </div>
+                 <% }else{ %>
+                    登录后才能发表说说
+                 <% }%>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2 " id="liebiao">
+                
+            </div>
+        </div>
+    </div>
+
+    <script type="text/template" id="template">
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object fatierentouxiang" src="{%=avatar%}"  >
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">{%=nickname%}说：</h4>
+            <p class="content">
+                {%=content%}
+            </p>
+            <div class="tu">
+
+            </div>
+            <p>
+                评论(444) 赞(444)  {%=date%}
+            </p>
+          </div>
+        </div>
+    </script>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/ajaxfileupload.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/underscore-min.js"></script>
+
+    <script type="text/javascript" src="/js/fatie.js"></script>
+
+    <script type="text/javascript">
+        function Media(dictionary){
+            this.templatefn = _.template($("#template").html());
+            this.$dom = $(this.templatefn(dictionary));
+
+            console.log(dictionary.picarr)
+
+            $("#liebiao").append(this.$dom);
+
+            for(var i = 0 ; i < dictionary.picarr.length ; i++){
+                this.$dom.find(".tu").append("<img src=" + dictionary.picarr[i] + " >");
+            }
+        }
+
+        var page = 1;
+        var lock = true;
+
+        $.get("/tiezi",{"page" : page , "pagesize" : 10} , function(data){
+            for(var i = 0 ; i < data.results.length ; i++){
+                new Media(data.results[i])
+            }
+           
+        });
+
+        $(window).scroll(function(){
+            if(!lock) return;
+            var A = $(window).scrollTop();
+            var B = $(window).height();
+            var C = $(document).height();
+
+            if( (A + B ) / C > 0.7){
+                lock = false;
+                $.get("/tiezi",{"page" : ++page , "pagesize" : 10} , function(data){
+                    for(var i = 0 ; i < data.results.length ; i++){
+                        new Media(data.results[i])
+                    }
+                    if(data.results.length != 0) lock = true;
+                });
+            }
+        })
+       
+    </script>
+</body>
+</html>

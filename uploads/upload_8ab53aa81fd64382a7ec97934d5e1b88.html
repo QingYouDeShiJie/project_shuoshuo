@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		img{
+			border:0px;
+		}
+		ol,ul,li{
+			list-style:none;
+		}
+		body{
+			background:skyblue;
+		}
+		.box{
+			width: 800px;
+			height:300px;
+			border: 1px solid #000;
+			margin:50px auto;
+			position:relative;
+			perspective:5000px;
+		}
+		.box ul{
+			position:absolute;
+			left:0;
+			top:0;
+			width: 800px;
+			height: 500px;
+			transform-style:preserve-3d;
+			transform:rotateX(-6deg) rotateY(0deg);
+			transition:all 1s ease 0s;
+		}
+		.box ul li{
+			position:absolute;
+			top:50px;
+			left:300px;
+			width:200px;
+			height:200px;
+		}
+		.btns a{
+			width: 40px;
+			height: 40px;
+			position:absolute;
+			top:50%;
+			margin-top:-20px;
+			background:green;
+			border-radius:40px;
+			
+		}
+		.btns a.btn1{
+			left:0px;
+		}
+		.btns a.btn2{
+			right:0px;
+		}
+		ul li::before{
+			content:"";
+			position:absolute;
+			width:100%;
+			height:100%;
+			top:0;
+			left:0;
+			background-color:#000;
+			opacity:0.5;
+		}
+		ul li.liang::before{
+			opacity:0;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul>
+			<li class="liang"><img src="zly/timg (1).png" alt="#" /></li>
+			<li class="liang"><img src="zly/timg (2).png" alt="#" /></li>
+			<li><img src="zly/timg (3).png" alt="#" /></li>
+			<li><img src="zly/timg (4).png" alt="#" /></li>
+			<li><img src="zly/timg (5).png" alt="#" /></li>
+			<li class="liang"><img src="zly/timg (6).png" alt="#" /></li>
+		</ul>
+		<div class="btns">
+			<a href="#" class="btn1"></a>
+			<a href="#" class="btn2"></a>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script>
+	$('.box ul li').each(function(i){
+		$(this).css("transform","rotateY("+(i*60)+"deg) translateZ(260px)");
+	})
+	var idx=0;
+	var arr = ["liang","liang","","","","liang"];
+	$(".btn2").click(function(){
+		idx-=60;
+		arr.unshift(arr.pop());
+	    for(var i=0;i<arr.length;i++){
+	    	$(".box ul li").eq(i).attr("class",arr[i]);
+	    }
+	    $(".box ul").css("transform","rotateX(-6deg) rotateY("+idx+"deg)");
+	})
+	$(".btn1").click(function(){
+		idx +=60;
+		arr.push(arr.shift());
+	    for(var i=0;i<arr.length;i++){
+	    	$(".box ul li").eq(i).attr("class",arr[i]);
+	    }
+	    $(".box ul").css("transform","rotateX(-6deg) rotateY("+idx+"deg)");
+	})
+</script>
