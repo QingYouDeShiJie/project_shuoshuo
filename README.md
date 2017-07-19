@@ -8,14 +8,14 @@
 
 该项目的文件夹结构如下所示：
 
-		┠ controllers   控制器
-		┠ models	   nodejs模型，里面放Mongoose数据库模型
-    ┠ controllers    控制器
-    ┠ node_modules 依赖
-    ┠ uploads      上传
-    ┠ views        ejs模板
-    ┠ www			静态资源
-    ┠ app.js	 nodejs的运行文件
+┠ controllers   控制器
+┠ models   nodejs模型，里面放Mongoose数据库模型
+┠ controllers    控制器
+┠ node_modules 依赖
+┠ uploads      上传
+┠ views        ejs模板
+┠ www	      静态资源
+┠ app.js     nodejs的运行文件
 
 项目特点
 
