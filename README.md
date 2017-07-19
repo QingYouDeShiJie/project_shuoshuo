@@ -1,10 +1,10 @@
 # project_shuoshuo
-运用强大的后台NodeJS，编写一个互动说说。
-说说项目 —— 一个基于NodeJs实现的后台互动系统。
-技术栈
+# 运用强大的后台NodeJS，编写一个互动说说。
+# 说说项目 —— 一个基于NodeJs实现的后台互动系统。
+# 技术栈
 ①借助BootStrap可以轻松实现页面的快速搭建及响应式，所以，本项目采用bootstrap搭建页面
 ②借助Node.js + ExpressJS实现。数据库采用MongoDB + Mongoose的配合实现数据库的增删改查工作；
-项目文件夹：
+# 项目文件夹：
 
 该项目的文件夹结构如下所示：
 
@@ -17,7 +17,7 @@
    ┠ www	      静态资源
    ┠ app.js     nodejs的运行文件
 
-项目特点
+# 项目特点
 
 功能
 
@@ -51,7 +51,7 @@ DELETE（删除资源），来实现资源表现层的状态转换（Representat
    app.post    ("/fabu"  			   ,  mainCtrl.fabu);
    app.get     ("/tiezi"  			   ,  mainCtrl.getTiezi);
 
-项目起步
+# 项目起步
 
    安装依赖
    npm install
